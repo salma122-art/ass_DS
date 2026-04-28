@@ -11,7 +11,7 @@ int search(int arr[], int n, int target) {
     while (left <= right) {
         int mid = (left + right) / 2;
 
-        // comparison 1
+        
         comparisons++;
         if (arr[mid] == target)
             return mid;
@@ -63,40 +63,31 @@ void runTest(int arr[], int n, int target, string testName) {
 
 int main() {
 
-    // 1 Normal rotated array
     int arr1[] = {5, 6, 7, 1, 2, 3, 4};
-
-    // 2 Duplicates in array
     int arr2[] = {2, 2, 2, 3, 4, 2};
-
-    // 3 Single element array
     int arr3[] = {1};
-
-    // 4 Target not present
     int arr4[] = {4, 5, 6, 7, 0, 1, 2};
-
-    // 5 Another rotated case
     int arr5[] = {10, 12, 15, 18, 2, 5, 8};
 
     int n;
 
-    // Test Case 1: Target in middle
+    // 1. Target in rotated array
     n = sizeof(arr1) / sizeof(arr1[0]);
     runTest(arr1, n, 2, "Target in rotated array");
 
-    // Test Case 2: Duplicates
+    // 2. Duplicates case
     n = sizeof(arr2) / sizeof(arr2[0]);
     runTest(arr2, n, 3, "Array with duplicates");
 
-    // Test Case 3: Single element
+    // 3. Single element case
     n = sizeof(arr3) / sizeof(arr3[0]);
     runTest(arr3, n, 1, "Single element array");
 
-    // Test Case 4: Not found
+    // 4. Target not present
     n = sizeof(arr4) / sizeof(arr4[0]);
     runTest(arr4, n, 10, "Target not present");
 
-    // Test Case 5: Another rotated array
+    // 5. Another rotated array
     n = sizeof(arr5) / sizeof(arr5[0]);
     runTest(arr5, n, 5, "Another rotated array");
 
