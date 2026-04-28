@@ -11,7 +11,7 @@ int search(int arr[], int n, int target) {
     while (left <= right) {
         int mid = (left + right) / 2;
 
-        // comparison 1
+        
         comparisons++;
         if (arr[mid] == target)
             return mid;
