@@ -20,20 +20,27 @@ public:
         for (int i = 0; i < s.length(); i++) {
             char ch = s[i];
 
+         
+            if (ch == ' ')
+                continue;
+
+          
             if (isDigit(ch)) {
-                number =ch - '0';
+                number = number * 10 + (ch - '0');
             }
 
             else if (ch == '+' || ch == '-') {
-                result += sign * number;
-                number = 0;
 
-                if (ch == '+')
-                    sign = 1;
-                else
-                    sign = -1;
-            }
+    if (i == 0 || s[i - 1] == '(') {
+        sign = (ch == '-') ? -1 : 1;
+        continue;
+    }
 
+    result += sign * number;
+    number = 0;
+
+    sign = (ch == '+') ? 1 : -1;
+}
             else if (ch == '(') {
                 st.push(result);
                 st.push(sign);
@@ -53,7 +60,6 @@ public:
                 result += st.top();
                 st.pop();
             }
-
         }
 
         result += sign * number;

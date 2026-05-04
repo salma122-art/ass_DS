@@ -1,5 +1,25 @@
 #include <iostream>
+#include <algorithm>
 using namespace std;
+// Time Complexity:
+//
+// Sorting Phase:
+// Left Half (Bubble Sort):
+// Worst/Average Case: O(n^2)
+// Because bubble sort compares adjacent elements repeatedly
+//
+// Right Half (Selection Sort):
+// O(n^2)
+// Because we scan remaining elements to find maximum each time
+//
+// Overall Sorting Complexity: O(n^2)
+//
+// Searching Phase:
+// Linear Search: O(n)
+// Because we may scan all elements in worst case
+//
+// Final Complexity:
+// Dominated by sorting → O(n^2)
 
 int comparisons = 0;
 int swaps = 0;

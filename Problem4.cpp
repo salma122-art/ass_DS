@@ -2,8 +2,9 @@
 #include <queue>
 #include <vector>
 #include <iomanip>
-#include <algorithm>
+
 using namespace std;
+
 
 struct Process {
     int id, at, bt, rem, ct, tat, wt;
@@ -134,22 +135,39 @@ public:
 };
 
 int main() {
+
+
+
     int quantum, n;
+
     cout << "Time Quantum: ";
     cin >> quantum;
+
     cout << "Number of Processes: ";
     cin >> n;
 
+    
     vector<pair<int,int>> data;
+
     for (int i = 0; i < n; i++) {
+
         int at, bt;
+
         cout << "Arrival Time, Needed Time P" << i+1 << ": ";
         cin >> at >> bt;
+
         data.push_back({at, bt});
     }
 
+  
+
     RoundRobinScheduler rr(quantum, data);
+
+
+
     rr.simulate();
+
+  
 
     return 0;
 }

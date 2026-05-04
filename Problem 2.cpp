@@ -1,5 +1,10 @@
 #include <iostream>
+#include <string>
 using namespace std;
+// Time Complexity:
+// Best Case: O(1)
+// Average Case: O(log n)
+// Worst Case: O(n)
 
 int comparisons = 0;
 
@@ -90,6 +95,8 @@ int main() {
     // 5. Another rotated array
     n = sizeof(arr5) / sizeof(arr5[0]);
     runTest(arr5, n, 5, "Another rotated array");
+
+    
 
     return 0;
 }
