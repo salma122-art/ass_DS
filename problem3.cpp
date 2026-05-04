@@ -24,7 +24,8 @@ using namespace std;
 int comparisons = 0;
 int swaps = 0;
 
-// Bubble Sort Ascending (left half)
+// Bubble Sort (ascending) for left half
+// Used to arrange first half in increasing order
 void bubbleSort(int arr[], int start, int end) {
     for (int i = start; i <= end; i++) {
         for (int j = start; j < end - (i - start); j++) {
@@ -37,7 +38,8 @@ void bubbleSort(int arr[], int start, int end) {
     }
 }
 
-// Selection Sort Descending (right half)
+// Selection Sort (descending) for right half
+// Used to arrange second half in decreasing order
 void selectionSortDesc(int arr[], int start, int end) {
     for (int i = start; i <= end; i++) {
         int maxIdx = i;
@@ -56,7 +58,7 @@ void selectionSortDesc(int arr[], int start, int end) {
     }
 }
 
-// Linear Search
+// Linear search to find target in full array
 int linearSearch(int arr[], int n, int target) {
     for (int i = 0; i < n; i++) {
         comparisons++;
@@ -66,7 +68,7 @@ int linearSearch(int arr[], int n, int target) {
     return -1;
 }
 
-// Build Bitonic + Search
+// Main process: sort halves then search
 void process(int arr[], int n, int target, string testName) {
 
     comparisons = 0;
@@ -76,12 +78,13 @@ void process(int arr[], int n, int target, string testName) {
 
     int mid = n / 2;
 
-
+    // Sort left half (ascending)
     bubbleSort(arr, 0, mid - 1);
 
-   
+    // Sort right half (descending)
     selectionSortDesc(arr, mid, n - 1);
 
+    // Search for target
     int result = linearSearch(arr, n, target);
 
     if (result != -1)
@@ -103,20 +106,10 @@ int main() {
 
     int n = 7;
 
-    // 1. Target at bitonic peak
     process(arr1, n, 10, "Target at bitonic point");
-
-    // 2. Target in left half
     process(arr2, n, 6, "Target in left half");
-
-    // 3. Target in right half
     process(arr3, n, 6, "Target in right half");
-
-    // 4. Target not present
     process(arr4, n, 100, "Target not present");
-
-    // 5. Array with duplicates
     process(arr5, n, 5, "Array with duplicates");
 
     return 0;
-}
