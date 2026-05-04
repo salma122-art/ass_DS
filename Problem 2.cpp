@@ -6,21 +6,21 @@ using namespace std;
 // Average Case: O(log n)
 // Worst Case: O(n)
 
-int comparisons = 0;
-
-
-int search(int arr[], int n, int target) {
+int searchRotatedArray(int arr[], int n, int target, int &comparisons) {
     int left = 0, right = n - 1;
     comparisons = 0;
 
     while (left <= right) {
-        int mid = (left + right) / 2;
+        int mid = left + (right - left) / 2;
 
-        
+        // Check if current middle element is the target
         comparisons++;
         if (arr[mid] == target)
             return mid;
 
+        // When duplicates exist at left, mid, and right,
+        // we cannot determine which side is sorted clearly
+        // so we shrink the search space
         comparisons++;
         if (arr[left] == arr[mid] && arr[mid] == arr[right]) {
             left++;
@@ -28,10 +28,11 @@ int search(int arr[], int n, int target) {
             continue;
         }
 
-      
+        // Check if left half is sorted
         comparisons++;
         if (arr[left] <= arr[mid]) {
 
+            // If target lies in the sorted left half, search left side
             comparisons++;
             if (target >= arr[left] && target < arr[mid])
                 right = mid - 1;
@@ -39,8 +40,10 @@ int search(int arr[], int n, int target) {
                 left = mid + 1;
         }
 
-       
+        // Otherwise, right half must be sorted
         else {
+
+            // If target lies in the sorted right half, search right side
             comparisons++;
             if (target > arr[mid] && target <= arr[right])
                 left = mid + 1;
@@ -49,14 +52,15 @@ int search(int arr[], int n, int target) {
         }
     }
 
+    // Target not found in array
     return -1;
 }
-
 
 void runTest(int arr[], int n, int target, string testName) {
     cout << "\n===== " << testName << " =====" << endl;
 
-    int result = search(arr, n, target);
+    int comparisons = 0;
+    int result = searchRotatedArray(arr, n, target, comparisons);
 
     if (result != -1)
         cout << "Found at index: " << result << endl;
@@ -76,27 +80,21 @@ int main() {
 
     int n;
 
-    // 1. Target in rotated array
+    // Test cases for different scenarios
     n = sizeof(arr1) / sizeof(arr1[0]);
     runTest(arr1, n, 2, "Target in rotated array");
 
-    // 2. Duplicates case
     n = sizeof(arr2) / sizeof(arr2[0]);
     runTest(arr2, n, 3, "Array with duplicates");
 
-    // 3. Single element case
     n = sizeof(arr3) / sizeof(arr3[0]);
     runTest(arr3, n, 1, "Single element array");
 
-    // 4. Target not present
     n = sizeof(arr4) / sizeof(arr4[0]);
     runTest(arr4, n, 10, "Target not present");
 
-    // 5. Another rotated array
     n = sizeof(arr5) / sizeof(arr5[0]);
     runTest(arr5, n, 5, "Another rotated array");
-
-    
 
     return 0;
 }
